@@ -1,0 +1,29 @@
+There are some simpler ways to do this query!
+
+One approach: Use a single subselect containing two aggregations.
+This query returns a floating-point value that needs to be multiplied
+by 100 to get the percentage.
+
+select to_char(date, 'FMMonth FMDD, YYYY'), err/total as ratio
+       from (select time::date as date,
+                    count(*) as total,
+                    sum((status != '200 OK')::int)::float as err
+                    from log
+                    group by date) as errors
+       where err/total > 0.01;
+Another approach: Use a join between two subselects. This query multiplies
+by 100 in order to avoid doing floating-point math, which also means that
+the answer is already a percentage.
+
+select to_char(a.date, 'Mon DD, YYYY'), (a.errors * 100 / b.requests)
+       from (select time::date as date, count(*) as errors
+             from log
+             where status != '200 OK'
+             group by date) as a,
+            (select time::date as date, count(*) as requests
+             from log
+             group by date) as b
+       where a.date = b.date
+       and (a.errors * 100 / b.requests) >= 1
+A third valid approach is to put some or all of the subselect logic into
+a view in the database, and then do a select over this view.
