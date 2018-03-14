@@ -1,10 +1,9 @@
-# Log Analysis Project
-## Udacity Full Stack Nanodegree
+# LogAnal
 
 ---
 
 ### Project Summary
-This project created a basic CLI analytic program that examines data in a PostgreSQL database and prints out reports in plain-text format using python3.
+This project created a basic CLI analytic program that examines data in a PostgreSQL database and prints out reports in plain-text format using python3. Over 2 million data was anaalysed based on log entries in the database. 
 
 ### Generated Report
 This Program generated report on the following descriptive statistics:
