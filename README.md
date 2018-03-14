@@ -17,9 +17,9 @@ This Program generated report on the following descriptive statistics:
 #### Requirements
 - Python 3
 - PostgreSQL
-- FSND virtual machine
 - newsdata.sql
-- 'vagrant' directory (available in the FSND virtual machine.)
+- 'vagrant' 
+- 'VirtualBox'
 
 
 #### Environment Set-Up
